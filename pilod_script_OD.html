@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bomb Game</title>
     <style>
+        /* set up the visual and structural aspects of the game page - e.g. full screen, no scroll bars, background gradient, etc. */ 
         body {
             margin: 0;
             overflow: hidden;
@@ -17,6 +18,8 @@
             background: url('empty_street.png') no-repeat bottom center;
             background-size: cover;
         }
+
+        /* style bombs (e.g. position, value annotation)*/
         .bomb {
             position: absolute;
             border-radius: 50%;
@@ -29,6 +32,8 @@
             align-items: center;
             font-weight: bold;
         }
+
+        /*style small, med, and large bombs, respectively */ 
         .small {
             width: 30px;
             height: 30px;
@@ -44,6 +49,8 @@
             height: 70px;
             background-color: black;
         }
+
+        /* style score*/ 
         #score {
             position: fixed;
             top: 10px;
@@ -51,6 +58,8 @@
             font-size: 24px;
             color: black;
         }
+
+        /* define animation (bomb is detonated or hits ground) */
         @keyframes explode {
             0% {
                 transform: scale(1);
@@ -71,6 +80,7 @@
         }
     </style>
 </head>
+
 <body>
     <canvas id="gameCanvas"></canvas>
     <div id="score">Score: 100</div>
