@@ -84,12 +84,15 @@
 <body>
     <canvas id="gameCanvas"></canvas>
     <div id="score">Score: 100</div>
+
     <script>
+        // begin javascript - init canvas dimentions
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        // initialize bomb sizes, values, n bombs 
         const bombSizes = ['small', 'medium', 'large'];
         const bombDamage = { small: 3, medium: 7, large: 9 };
         let score = 100;
@@ -97,10 +100,12 @@
         let bombCount = 0;
         const totalBombs = 100;
 
+        // function to update score
         function updateScore() {
             document.getElementById('score').innerText = `Score: ${score}`;
         }
 
+        // function to create the bombs 
         function createBomb() {
             if (bombCount >= totalBombs) return;
             const size = bombSizes[Math.floor(Math.random() * bombSizes.length)];
@@ -130,7 +135,8 @@
                 setTimeout(createBomb, 500);
             }
         }
-
+        
+        // function to create explosion
         function createExplosion(x, y, size) {
             const explosion = document.createElement('div');
             explosion.className = 'explosion';
@@ -142,6 +148,7 @@
             setTimeout(() => explosion.remove(), 500);
         }
 
+        // function to move bombs down screen. Subtract value of bomb if not detonated by the time it reaches the bottom. End game when score <= 0
         function updateBombs() {
             bombs.forEach(bomb => {
                 let y = parseFloat(bomb.dataset.y);
@@ -162,12 +169,14 @@
                 }
             });
         }
-
+        
+        //  function to continuously update the bomb positions by calling updateBombs() and requests the next animation frame for smooth gameplay.
         function gameLoop() {
             updateBombs();
             requestAnimationFrame(gameLoop);
         }
 
+        // start the game and keep it running until score <= 0
         createBomb();
         updateScore();
         gameLoop();
